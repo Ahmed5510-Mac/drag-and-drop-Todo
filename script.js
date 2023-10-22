@@ -19,14 +19,27 @@ let inputTask =document.querySelector("input")
                     drag=task
                     task.style.opacity="0.5"
                 })
+                task.addEventListener('touchstart',_=>{
+                    drag=task
+                    task.style.opacity="0.5"
+                })
             // =========================
                 task.addEventListener('dragend',_=>{
+                    drag=null
+                    task.style.opacity="1"
+                })
+                task.addEventListener('touchend',_=>{
                     drag=null
                     task.style.opacity="1"
                 })
             
                 boxes.forEach(box=>{ 
                     box.addEventListener('dragover',function(e){
+                        e.preventDefault()
+                    this.style.boxShadow=`5px 5px 10px #000`
+                    this.children[0].style.display="block"
+                    })
+                    box.addEventListener('touchmove',function(e){
                         e.preventDefault()
                     this.style.boxShadow=`5px 5px 10px #000`
                     this.children[0].style.display="block"
@@ -39,6 +52,33 @@ let inputTask =document.querySelector("input")
                          this.style.boxShadow=`none`
                     })
                     box.addEventListener('drop',function(){
+                        if (box.classList.contains('finshed'))
+                        {
+                            drag.style.backgroundColor="red"
+                            drag.style.textDecoration="line-through"
+                        }
+                        else if(box.classList.contains('working'))
+                        {
+                            drag.style.backgroundColor="#8bc34a"
+                            drag.style.textDecoration="none"
+
+                        }
+                        else if(box.classList.contains('pending'))
+                        {
+                            drag.style.backgroundColor="#673ab7"
+                            drag.style.textDecoration="none"
+                        }
+                        else if(box.classList.contains('init'))
+                        {
+                            drag.style.backgroundColor="#2196f3"
+                            drag.style.textDecoration="none"
+                        }
+                         this.append(drag)
+                         this.style.backgroundColor="#303443"
+                         this.children[0].style.display="none"
+                         this.style.boxShadow=`none`
+                    })
+                    box.addEventListener('touchend',function(){
                         if (box.classList.contains('finshed'))
                         {
                             drag.style.backgroundColor="red"
