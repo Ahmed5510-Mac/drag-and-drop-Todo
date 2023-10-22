@@ -40,7 +40,7 @@ let inputTask =document.querySelector("input")
                     this.children[0].style.display="block"
                     })
                     box.addEventListener('touchmove',function(e){
-                        e.preventDefault()
+                        
                     this.style.boxShadow=`5px 5px 10px #000`
                     this.children[0].style.display="block"
                     })
@@ -51,6 +51,12 @@ let inputTask =document.querySelector("input")
                          this.children[0].style.display="none"
                          this.style.boxShadow=`none`
                     })
+                    box.addEventListener('touchcancel',function(){
+                        
+                        this.style.backgroundColor="#303443"
+                        this.children[0].style.display="none"
+                        this.style.boxShadow=`none`
+                   })
                     box.addEventListener('drop',function(){
                         if (box.classList.contains('finshed'))
                         {
